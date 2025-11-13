@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+body {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+@theme {
+    /* font styles */
+    --font-inter: 'Inter', sans-serif;
+    --font-stardos: 'Stardos Stencil', serif;
+    --font-blackcops: 'Black Ops One', cursive;
+
+    /* custom colors */
+    --color-army: #4B5320;
+    --color-sand: #C2B280;
+    --color-warning: #f2b90c;
+    --color-primary: #0a2c5c;
+}
+
+body {
+    font-family: var(--font-inter);
+}
