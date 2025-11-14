@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Navbar from './components/Navbar';
 import './App.css';
+import './tailwind.css';
 import Home from './pages/Home';
 import Footer from './components/Footer';
 

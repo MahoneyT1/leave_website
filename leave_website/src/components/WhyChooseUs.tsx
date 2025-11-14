@@ -12,7 +12,7 @@ const WhyChooseUs: React.FC = () => {
                 <div className="text-center mb-16">
                     <h2 className="text-4xl md:text-5xl 
                         font-bold text-primary mb-4">
-                            Why Choose Us
+                            Your information is encrypted &amp; secure
                     </h2>
 
                     <p className="text-xl text-secondary 
@@ -34,11 +34,11 @@ const WhyChooseUs: React.FC = () => {
                             <Shield size={50} className="text-primary" />
                         </div>   
 
-                        <h3 className="text-xl font-semibold text-foreground mb-3">
+                        <h3 className="text-xl font-semibold text-primary mb-3">
                             Secure &amp; Confidential
                         </h3>  
 
-                        <p className="text-muted-foreground leading-relaxed">
+                        <p className="leading-relaxed text-secondary">
                             Military-grade encryption ensures your family's 
                             information remains private and protected.
                         </p>      
@@ -53,13 +53,13 @@ const WhyChooseUs: React.FC = () => {
                               <Clock size={50} className="text-primary" />
                           </div>
 
-                          <h3 className="text-xl font-semibold text-foreground mb-3">
-                              Secure &amp; Confidential
+                          <h3 className="text-xl font-semibold text-primary mb-3">
+                              Fast Processing
                           </h3>
 
-                          <p className="text-muted-foreground leading-relaxed">
-                              Military-grade encryption ensures your family's
-                              information remains private and protected.
+                          <p className="text-secondary leading-relaxed">
+                            Most applications are reviewed within 48-72 hours, 
+                            getting answers when you need them.
                           </p>
 
                       </div>
@@ -72,13 +72,13 @@ const WhyChooseUs: React.FC = () => {
                               <User size={50} className="text-primary" />
                           </div>
 
-                          <h3 className="text-xl font-semibold text-foreground mb-3">
-                              Secure &amp; Confidential
+                          <h3 className="text-xl font-semibold text-primary mb-3">
+                              Dedicated Support
                           </h3>
 
-                          <p className="text-muted-foreground leading-relaxed">
-                              Military-grade encryption ensures your family's
-                              information remains private and protected.
+                          <p className="text-secondary leading-relaxed">
+                              Our team of military family advocates is here to 
+                              help you every step of the way.
                           </p>
 
                       </div>
@@ -91,13 +91,13 @@ const WhyChooseUs: React.FC = () => {
                               <Award size={50} className="text-primary" />
                           </div>
 
-                          <h3 className="text-xl font-semibold text-foreground mb-3">
-                              Secure &amp; Confidential
+                          <h3 className="text-xl font-semibold text-primary mb-3">
+                              Trusted Service
                           </h3>
 
-                          <p className="text-muted-foreground leading-relaxed">
-                              Military-grade encryption ensures your family's
-                              information remains private and protected.
+                          <p className="text-secondary leading-relaxed">
+                              Serving military families with honor and integrity 
+                              since our establishment.
                           </p>
 
                       </div>

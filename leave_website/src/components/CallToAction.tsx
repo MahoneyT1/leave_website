@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 
-const CallToAction = () => {
+const CallToAction: React.FC = () => {
   return (
       <section className="py-20 bg-primary">
 

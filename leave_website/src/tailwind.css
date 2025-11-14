@@ -1,10 +1,6 @@
 @import "tailwindcss";
 
-body {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
+
 
 @theme {
     /* font styles */
@@ -16,12 +12,15 @@ body {
     --color-army: #4B5320;
     --color-sand: #C2B280;
     --color-warning: #f2b90c;
-    --color-primary: #0a2c5c;
+    --color-primary: #0a2c5c; 
     --color-secondary: #627085;
     --color-accent: #f2f4f7;
     --color-foot: #173763;
 }
 
 body {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
     font-family: var(--font-inter);
 }

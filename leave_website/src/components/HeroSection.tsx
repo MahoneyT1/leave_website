@@ -2,7 +2,7 @@ import React from 'react';
 import heroImage from "../assets/hero-image.jpg"
 
 
-const HeroSection = () => {
+const HeroSection: React.FC = () => {
   return (
       <section className='relative min-h-[600px] py-15 flex items-center 
         justify-center overflow-hidden'>
@@ -11,7 +11,7 @@ const HeroSection = () => {
             style={{ backgroundImage: `url(${heroImage})`,     
             }}>
 
-            <div className="absolute inset-0  bg-gradient-to-r 
+            <div className="absolute inset-0  bg-linear-to-r 
                 from-primary/75 via-primary/60 to-primary/95 
                 pointer-events-none">
             </div>

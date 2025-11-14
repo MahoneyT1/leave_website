@@ -3,7 +3,7 @@ import Card from './Card';
 import { FileText, Mail, Clock, CircleCheck } from 'lucide-react'
 
 
-const HowItWorks = () => {
+const HowItWorks: React.FC = () => {
   return (
       <section className='bg-accent '>
 
@@ -17,7 +17,7 @@ const HowItWorks = () => {
                         How it works
                     </h2>
                     
-                    <p className='text-secondary text-lg
+                    <p className='text-primary/60 text-lg
                         max-w-2xl mx-auto md:text-xl'>
                         Our streamlined process makes applying for 
                         military leave simple and efficient
@@ -25,7 +25,7 @@ const HowItWorks = () => {
                 </div>
 
                 <div className='grid grid-cols-1 gap-8 md:grid md:grid-cols-2 md:gap-8 md:gap-y-6 
-                    lg:grid-cols-4 lg:grid-cols-4'>
+                    lg:grid-cols-4'>
                     <div className=' relative'>
                         <Card number='1' icon={<FileText/>} title='Complete Application' 
                             description="Fill out our simple online application form 
@@ -44,7 +44,8 @@ const HowItWorks = () => {
                     </div>
 
                     <div className='relative'>
-                        <Card number='3' icon={ <Clock size={25} /> } 
+                        <Card number='3' icon={ <Clock size={25} />} 
+                            className='text-primary' 
                             title='Track progress' 
                             description='Monitor your application status in real-time 
                                 throguh your personal dashboard.' />

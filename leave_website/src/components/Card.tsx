@@ -17,10 +17,10 @@ const Card: React.FC <CardProps>= ({number, icon, title, description, className 
       hover:border-primary
             relative'>
 
-        <div className='bg-orange-200/60 w-12 h-12 rounded-full
-            flex items-center justify-center mb-6'>
+        <div className={`bg-orange-200/60 w-12 h-12 rounded-full
+            flex items-center text-primary justify-center mb-6 ${className}`}>
 
-            <span className={className}>
+            <span>
                   {icon}
             </span>
 
