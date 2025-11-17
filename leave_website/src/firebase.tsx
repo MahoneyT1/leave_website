@@ -3,20 +3,28 @@
  * @description This file contains the Firebase configuration and initialization for the application.
  * It sets up the connection to Firebase services using the provided configuration details.
  */
+
 import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBYQhfzrl73N0AKGYsy4BaFfzrCry1MIyw",
-    authDomain: "leave-portal-35494.firebaseapp.com",
-    projectId: "leave-portal-35494",
-    storageBucket: "leave-portal-35494.firebasestorage.app",
-    messagingSenderId: "425987248235",
-    appId: "1:425987248235:web:2fbf7276ec1d3f40e7612e",
-    measurementId: "G-YCCJLRMQMN"
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_FIREBASE_APP_ID,
+    measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
 
 const app = initializeApp(firebaseConfig);
+
+export const auth = getAuth(app);
 export const db = getFirestore(app);
+export const storage = getStorage(app);
+
+export default app;
