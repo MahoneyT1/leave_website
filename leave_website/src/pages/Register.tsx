@@ -22,10 +22,10 @@ const Register: React.FC = () => {
     const onSubmit = async (data: any) => {
         console.log(data);
 
-       const { email, password } = data;
+       const { email, password, name } = data;
 
        try {
-        await registerUser(email, password);
+        await registerUser(email, password, name);
         toast.success("user successfully created", {
             autoClose: 2000,
             onClose: ()=> navigate('/login')

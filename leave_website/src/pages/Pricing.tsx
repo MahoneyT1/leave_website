@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { db } from '../firebase';
+import { submitLeaveRequest, getEmergency, getCompassionate, getHumanitarian } from '../services';
+import type { LeaveRequest } from '../services';
+import { auth } from '../firebase';
+import { toast } from 'react-toastify';
 
 
+type LeaveType = 'emergency' | 'compassionate' | 'humanitarian';
+
+interface LeaveDoc {
+    id: string;
+    price?: number;
+}
 
 const Pricing: React.FC = () => {
     const [selected, setSelected] = useState('');
@@ -11,11 +22,63 @@ const Pricing: React.FC = () => {
         register,
         reset,
         handleSubmit,
-        formState : { errors, isSubmitting }
-    } = useForm();
+        formState: { errors, isSubmitting }
+    } = useForm<LeaveRequest & { leaveType?: LeaveType }>();
 
-    const onSubmit = (data: any) => {
-        console.log(data);
+    const [leaves, setLeaves] = useState<Record<LeaveType, LeaveDoc | null>>({
+            emergency: null,
+            compassionate: null,
+            humanitarian: null
+    });
+
+
+    useEffect(() => {
+            const fetchLeaves = async () => {
+                try {
+                    const [emergencyData, compassionateData, humanitarianData] = await Promise.all([
+                        getEmergency(),
+                        getCompassionate(),
+                        getHumanitarian()
+                    ]);
+    
+                    setLeaves({
+                        emergency: emergencyData[0] || null,
+                        compassionate: compassionateData[0] || null,
+                        humanitarian: humanitarianData[0] || null
+                    });
+                } catch (err) {
+                    console.log(err);
+                    console.log(auth.currentUser?.uid)
+                }
+            };
+            fetchLeaves();
+        }, []);
+    // console.log(auth.currentUser?.uid)
+   
+    const onSubmit = async (data: LeaveRequest) => {
+        const user = auth.currentUser
+    
+        if (!user) {
+            toast.warning('Please Login to to submit a request');
+            return
+        }
+        try {
+            await submitLeaveRequest({
+                fullName: data.fullName,
+                militaryId: data.militaryId,
+                email: data.email,
+                phoneNumber: data.phoneNumber,
+                description: data.description,
+                userId: user.uid,
+                type: selected
+            })
+
+            toast.success("Application submitted ! ")
+            reset();
+    
+        } catch (err) {
+            console.log(err);
+        }
     }
 
   return (
@@ -40,7 +103,7 @@ const Pricing: React.FC = () => {
                         </h3>
                         
                         <p className="text-3xl font-bold text-primary">
-                            $299
+                            ${leaves.emergency?.price?.toString()}
                         </p>
                         
                     </div>
@@ -71,7 +134,7 @@ const Pricing: React.FC = () => {
                                 Compassionate Reassignment
                             </h3>
                             
-                            <p className="text-3xl font-bold text-primary">$499
+                            <p className="text-3xl font-bold text-primary">${leaves?.compassionate?.price}
                             </p>
                             
                         </div>
@@ -105,7 +168,7 @@ const Pricing: React.FC = () => {
                                     Humanitarian Leave
                                 </h3>
                                 
-                                <p className="text-3xl font-bold text-primary">$399
+                                <p className="text-3xl font-bold text-primary">$ {leaves?.humanitarian?.price}
                                 </p>
                             </div>
                             
@@ -154,33 +217,38 @@ const Pricing: React.FC = () => {
                                 type="radio"
                                   {...register("leaveType")}
                                 value="emergency"
-                                // checked={selected === "emergency"}
-                                // onChange={() => setSelected('emergency')}
+                                checked={selected === "emergency"}
+                                onChange={() => setSelected('emergency')}
                             />
-                            <span>Emergency Family Leave $299</span>
+                              <span>Emergency Family Leave ${leaves.emergency?.price?.toString()}</span>
                         </label>
+                        { errors.leaveType && ( <p className='text-red-500'> {errors.leaveType.message} </p> ) }
 
                         <label className='flex items-center space-x-2'>
                             <input
                                 type="radio"
-                                { ...register('LeaveType') }
+                                { ...register('leaveType') }
                                 value="compassionate"
-                                // checked={selected === "compassionate"}
-                                // onChange={() => setSelected('compassionate')}
+                                checked={selected === "compassionate"}
+                                onChange={() => setSelected('compassionate')}
                             />
-                            <span>Compassionate Reassignment - $499</span>
+                              <span>Compassionate Reassignment - ${leaves.compassionate?.price?.toString()}</span>
                         </label>
+                        {errors.leaveType && (<p className='text-red-500'> {errors.leaveType.message} </p>)}
+
 
                         <label className='flex items-center space-x-2'>
                             <input
                                 type="radio"
                                 {...register('leaveType') }
                                 value="humanitarian"
-                                // checked={selected === "humanitarian"}
-                                // onChange={() => setSelected('humanitarian')}
+                                checked={selected === "humanitarian"}
+                                onChange={() => setSelected('humanitarian')}
                             />
-                            <span>Humanitarian Leave - $399</span>
+                              <span>Humanitarian Leave - ${leaves.humanitarian?.price?.toString()}</span>
                         </label>
+                        {errors.leaveType && (<p className='text-red-500'> {errors.leaveType.message} </p>)}
+
                     </div>
 
                     <div className='mt-8'>
@@ -189,7 +257,7 @@ const Pricing: React.FC = () => {
                                 Full Name</span>
                             <input type="text" id="full-name" 
                                   placeholder="Officer's name" 
-                                  { ...register('full_name')}
+                                  { ...register('fullName')}
                                   className="flex h-10 w-full rounded-md border border-input 
                                         bg-background px-3 py-2 text-base ring-offset-background mt-1
                                         file:border-0 file:bg-transparent file:text-sm file:font-medium 
@@ -198,13 +266,15 @@ const Pricing: React.FC = () => {
                                         focus-visible:ring-ring focus-visible:ring-offset-2 
                                         disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"  />
                         </label>
+                        {errors.fullName && (<p className='text-red-500'> {errors.fullName.message} </p>)}
+
 
                         <label htmlFor="military id" className='mt-4'>
                               <span className='text-primary'>Military ID</span>
 
                             <input type="text" id="military-id"
                                   placeholder="123456"
-                                  { ...register('military_id') } 
+                                  { ...register('militaryId') } 
                                   className="flex h-10 w-full rounded-md border border-input 
                                         bg-background px-3 py-2 text-base ring-offset-background mt-1
                                         file:border-0 file:bg-transparent file:text-sm file:font-medium 
@@ -213,6 +283,8 @@ const Pricing: React.FC = () => {
                                         focus-visible:ring-ring focus-visible:ring-offset-2 
                                         disabled:cursor-not-allowed disabled:opacity-50 md:text-sm" />
                         </label>
+                        {errors.militaryId && (<p className='text-red-500'> {errors.militaryId.message} </p>)}
+
 
                         <label htmlFor="email">
                             Email
@@ -227,12 +299,14 @@ const Pricing: React.FC = () => {
                                         focus-visible:ring-ring focus-visible:ring-offset-2 
                                         disabled:cursor-not-allowed disabled:opacity-50 md:text-sm" />
                         </label>
+                        {errors.email && (<p className='text-red-500'> {errors.email.message} </p>)}
+
 
                         <label htmlFor="phone">
                             <span className='text-primary'>Phone</span>
                             <input type="tel" id="phone"
                                 placeholder="(555) 123-4567"
-                                 {...register('phone')}
+                                 {...register('phoneNumber')}
                                   className="flex h-10 w-full rounded-md border border-input 
                                         bg-background px-3 py-2 text-base ring-offset-background mt-1
                                         file:border-0 file:bg-transparent file:text-sm file:font-medium 
@@ -240,20 +314,22 @@ const Pricing: React.FC = () => {
                                         focus-visible:outline-none focus-visible:ring-2 
                                         focus-visible:ring-ring focus-visible:ring-offset-2 
                                         disabled:cursor-not-allowed disabled:opacity-50 md:text-sm" />
-                          </label>
+                        </label>
+                        {errors.phoneNumber && (<p className='text-red-500'> {errors.phoneNumber.message} </p>)}
 
                         <label htmlFor="long-text" >
                             <span className='text-primary '>Situation Description</span>
                             <textarea id="long-text" 
                                 placeholder='Please Describe your situation in details'
-                                { ...register('reason') }
+                                { ...register('description') }
                                 className='flex w-full rounded-md border border-input bg-background px-3 py-2 
                                     text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none 
                                     focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 
                                     disabled:cursor-not-allowed disabled:opacity-50 min-h-[120px]'>
                             </textarea>
-                        
                         </label>
+                        {errors.description && (<p className='text-red-500'> {errors.description.message} </p>)}
+
                     </div>
 
                     <div className='bg-secondary/10  rounded mt-7 '>
@@ -262,15 +338,13 @@ const Pricing: React.FC = () => {
                             Compassionate Reassignment application
                         </p>
 
-                        <button 
-                            type='submit'
-                            className='bg-primary text-white font-semibold mt-5
-                                rounded p-3 '>
-                                Submit Application - $499
+                        <button
+                            type="submit"
+                            disabled={isSubmitting}
+                            className={`bg-primary text-white font-semibold mt-5 rounded p-3 ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}>
+                            {isSubmitting ? 'Submitting...' : 'Submit Application'}
                         </button>
-                    </div>
-
-                    
+                    </div>    
                 </form>
             </div>
         </div>
@@ -278,4 +352,4 @@ const Pricing: React.FC = () => {
   )
 }
 
-export default Pricing
+export default Pricing;

@@ -12,34 +12,36 @@ import Contact from './pages/Contact';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Pricing from './pages/Pricing';
-import Overview from './pages/Dashboard/Overview';
+import AdminLayout from './pages/Admin/AdminLayout';
+import { Outlet } from 'react-router-dom';
+import PublicLayout from './pages/PublicLayout';
 
 
 function App() {
 
   return (
     <>
-      <header>
-        <Navbar/>
-      </header>
+     {/* public layout */}
+     <Routes>
+        <Route element={<PublicLayout />} > 
+          <Route path='/' element={<Home />} />
+          <Route path='/about' element={<About />} />
+          <Route path='/faq' element={<FAQ />} />
+          <Route path='/How' element={<HowItWorks />} />
+          <Route path='/contact' element={<Contact />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/price' element={<Pricing />} />
+        </Route>
 
-      <main>
-        <Routes>
-          <Route path='/' element={<Home/>} />
-          <Route path='/about' element={<About/>} />
-          <Route path='/faq' element={ <FAQ /> } />
-          <Route path='/How' element={ <HowItWorks /> } />
-          <Route path='/contact' element={ <Contact /> } />
-          <Route path='/register' element={ <Register /> } />
-          <Route path='/login' element={ <Login /> } />
-          <Route path='/price' element={ <Pricing/> } />
-          <Route path='/dashboard' element={ <Overview /> } />
-        </Routes>       
-      </main>
+        <Route element={ <AdminLayout/> } >
+          <Route path='/admin' element={<AdminLayout/>} />
+        </Route>
+     
 
-      <footer>
-        <Footer/>
-      </footer>
+     {/* Admin route */}
+
+    </Routes>
     </>
   )
 }
