@@ -160,7 +160,7 @@ export const getUserLeaveRequests = async () => {
     if (!user) return [];
 
     const q = query(
-        collection(db, "Leave_request"),
+        collection(db, "leave_requests"),
         where("userId", "==", user.uid)
     );
 

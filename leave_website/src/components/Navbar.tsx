@@ -13,11 +13,10 @@ const Navbar: React.FC = () => {
     const navigate = useNavigate();
 
     const auth = useAuth();
-
     const handleLoginLogout = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
 
-        if ( auth.user ) {
+        if ( auth?.user ) {
             logoutUser();
         } else {
             navigate('/login');
@@ -62,6 +61,8 @@ const Navbar: React.FC = () => {
                         <li className='hover:text-sand'><Link to='/Faq'>Faq</Link></li>                        
                         <li className='hidden lg:flex hover:text-sand'><Link to='/how'>How it works</Link></li>
                         <li className='hover:text-sand'><Link to='/contact'>Contact</Link></li>
+                        <li className='hover:text-sand'><Link to="/profile">Profile </Link></li>
+
                     </ul>
                 </nav>
 
@@ -71,21 +72,25 @@ const Navbar: React.FC = () => {
             <div className='hidden md:flex md:col-span-4
                 md:justify-center md:gap-5 lg:col-span-3'>
 
-                <button className='text-primary rounded-md font-medium 
+                <button 
+                    onClick={handleLoginLogout}
+                    className='text-primary rounded-md font-medium 
                     hover:text-sand transition-colors duration-300 
                     md:w-20 md:p-2 lg:h-13 lg:w-25 lg:px-4 text-center 
-                    hover:bg-primary'
-                    onClick={handleLoginLogout}>
+                    hover:bg-primary'>
                         { auth.user ? <p>Log out</p> : <p> Log in </p>}
                     
                 </button>
 
-                <button 
-                    className='bg-primary text-white rounded-md
-                    font-medium hover:text-sand transition-colors 
-                    duration-300 md:px-5  lg:h13 lg:px-4 lg:p-1 text-center'>
-                    <Link to='/price'>Apply Now</Link>
+                { auth?.isAdmin && (
+                    <button 
+                        className='bg-primary text-white rounded-md
+                        font-medium hover:text-sand transition-colors 
+                        duration-300 md:px-5  lg:h13 lg:px-4 lg:p-1 text-center'>
+                        <Link to='/admin'>Admin Dashboard</Link>
                 </button>
+                ) }
+                
             </div>
 
             {/* mobile div */}      
@@ -99,7 +104,7 @@ const Navbar: React.FC = () => {
                         <li className='p-1 font-semibold hover:text-sand'><Link to="/Fag">Fag</Link></li>
                         <li className='p-1 font-semibold hover:text-sand'><Link to="/how">How</Link></li>
                         <li className='p-1 font-semibold hover:text-sand'><Link to="/contact">Contact</Link></li>
-
+                        <li className='p-1 font-semibold hover:text-sand'><Link to="/profile">Profile </Link></li>
                     </ul>  
                 </nav>
             )}

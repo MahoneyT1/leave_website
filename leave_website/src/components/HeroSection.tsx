@@ -1,8 +1,12 @@
 import React from 'react';
 import heroImage from "../assets/hero-image.jpg"
+import { useNavigate } from 'react-router-dom';
 
 
 const HeroSection: React.FC = () => {
+
+
+    const navigate = useNavigate();
   return (
       <section className='relative min-h-[600px] py-15 flex items-center 
         justify-center overflow-hidden'>
@@ -33,13 +37,15 @@ const HeroSection: React.FC = () => {
 
             <div className='max-w-md z-40 flex flex-col 
                 sm:flew-row gap-5 md:flex-row'>
-                <button className='inline-flex items-center 
+                <button onClick={()=> navigate('/price')} 
+                    className='inline-flex items-center 
                     justify-center gap-2 whitespace-nowrap 
                     font-medium h-11 rounded-md bg-warning 
                     text-lg px-8 py-6'>Start Your Application
                 </button>
 
-                <button className="inline-flex items-center 
+                <button onClick={()=> navigate('/how')}
+                    className="inline-flex items-center 
                     justify-center gap-2 whitespace-nowrap 
                     font-medium bg-white text-secondary-foreground 
                     h-11 rounded-md text-lg px-8 py-6">

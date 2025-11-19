@@ -1,23 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import {
     getEmergency, getCompassionate, getHumanitarian,
     updateEmergency, updateCompassionate, updateHumanitarian
 } from '../../services';
 
+
 type LeaveType = 'emergency' | 'compassionate' | 'humanitarian';
 
 interface LeaveDoc {
     id: string;
-    price: number;
+    price?: number;
 }
 
 const AdminLayout: React.FC = () => {
-         const [leaves, setLeaves] = useState<Record<LeaveType, LeaveDoc | null>>({
-   emergency: null,
+    const [leaves, setLeaves] = useState<Record<LeaveType, LeaveDoc | null>>({
+        emergency: null,
         compassionate: null,
         humanitarian: null
     });
+
+    const navigate = useNavigate();
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm<{ type: LeaveType, price: string }>({});
 
@@ -83,6 +87,10 @@ const AdminLayout: React.FC = () => {
         }
     };
 
+    const handleNavigate = (e: { preventDefault: () => void; }) => {
+        e.preventDefault();
+
+    }
     return (
         <section className="w-full h-screen bg-primary">
             <div className="container px-4 mx-auto md:px-50 lg:px-70">
@@ -120,13 +128,18 @@ const AdminLayout: React.FC = () => {
                                     {...register('price', { required: "Must include value to update" })}
                                     value={updatePrice}
                                     onChange={handleInputChange}
-                                    className="border rounded-lg w-full border-white bg-white mb-4"
+                                    className="border rounded w-full border-white bg-white mb-4 text-center"
                                 />
-                                {errors.price && <p className="text-red-500">{errors.price.message}</p>}
+                                {errors.price && <p className="text-red-500"> {errors.price.message}</p>}
 
-                                <div className="flex justify-center items-center gap-5 mt-5">
-                                    <button type="submit" className="border w-30 p-1 bg-green-500">
+                                <div className="flex justify-center items-center gap-5 mt-5 text-white">
+                                    <button type="submit" className="shadow-lg w-30 p-1 bg-green-500 rounded">
                                         Update
+                                    </button>
+
+                                    <button type='button' onClick={handleNavigate}
+                                    className='bg-orange-500 w-30 p-1 shadow-lg rounded '>
+                                        Back
                                     </button>
                                 </div>
                             </form>
