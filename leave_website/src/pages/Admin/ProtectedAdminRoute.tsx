@@ -1,10 +1,14 @@
-import { useContext } from "react";
-import { Navigate } from "react-router-dom";
 import { useAuth } from "../../components/AuthProvider";
-import type { auth } from "../../firebase";
 
-export default function ProtectedAdminRoute({ children }) {
-    const { user, isAdmin } = useAuth();
+
+interface ProtectedAdminRouteProps {
+    children: React.ReactNode
+}
+
+
+
+export default function ProtectedAdminRoute ({ children }: ProtectedAdminRouteProps)  {
+    const { isAdmin } = useAuth();
 
     // if (!user) {
     //     return <Navigate to="/login" replace />;

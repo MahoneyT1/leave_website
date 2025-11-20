@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { db } from '../firebase';
 import { submitLeaveRequest, getEmergency, getCompassionate, getHumanitarian } from '../services';
 import type { LeaveRequest } from '../services';
 import { auth } from '../firebase';

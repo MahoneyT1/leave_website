@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useState} from 'react';
 import {  useForm } from "react-hook-form";
 import { registerUser } from '../services';
-import { auth } from '../firebase';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { Eye, EyeOff } from "lucide-react";
 
 
 
 const Register: React.FC = () => {
+    const [showPassword, setShowPassword] = useState(false);
 
     const navigate = useNavigate();
 
@@ -16,7 +17,7 @@ const Register: React.FC = () => {
         handleSubmit,
         watch,
         reset,
-        formState: { errors, isLoading, isSubmitting }
+        formState: { errors }
     } = useForm();
 
     const onSubmit = async (data: any) => {
@@ -91,13 +92,14 @@ const Register: React.FC = () => {
                 
             </div>
             
-            <div className="space-y-2">
+            <div className="space-y-2 relative">
                 <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed text-primary 
                     peer-disabled:opacity-70" htmlFor="password">
                         Password
                 </label>
                 
-                <input type="password" 
+                <input 
+                      type={showPassword ? "text" : "password"} 
                       className="flex h-10 w-full rounded-md border border-input border-secondary/50 bg-background px-3 py-2 
                         text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm 
                         file:font-medium file:text-foreground placeholder:text-muted-foreground 
@@ -106,18 +108,27 @@ const Register: React.FC = () => {
                         md:text-sm" id="password" placeholder="••••••••"
                         { ...register('password', { required: "Password is required", 
                             minLength: { value: 6, message: "Require atleast 6 digitd" } }) } />
+
+                    <button
+                        type="button"
+                        className="absolute right-3 top-2/3 -translate-y-1/2 text-gray-600"
+                        onClick={() => setShowPassword(!showPassword)}
+                        >
+                            {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                    </button>
                   {errors.password?.message && (<p className='text-red-500'>{String(errors.password.message)}</p>)}
 
 
             </div>
             
-            <div className="space-y-2">
+            <div className="space-y-2 relativeserv">
                 <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed text-primary
                     peer-disabled:opacity-70" htmlFor="confirmPassword">
                         Confirm Password
                 </label>
                 
-                  <input type="password" className="flex h-10 w-full rounded-md border border-input border-secondary/50 
+                  <input type={showPassword ? "text" : "password"} 
+                    className="flex h-10 w-full rounded-md border border-input border-secondary/50 
                     bg-background px-3 py-2 text-base ring-offset-background file:border-0 
                     file:bg-transparent file:text-sm file:font-medium file:text-foreground 
                     placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 
@@ -129,6 +140,13 @@ const Register: React.FC = () => {
                           validate: (value: string) => value === watch('password') || "Passwords do not match"
                         }
                     )} />
+                  <button
+                      type="button"
+                      className="absolute right-3 top-2/3 -translate-y-1/2 text-gray-600"
+                      onClick={() => setShowPassword(!showPassword)}
+                  >
+                      {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                  </button>
                   {errors.confirmPassword?.message && (<p className='text-red-500'>{String(errors.confirmPassword.message)}</p>)}
 
 

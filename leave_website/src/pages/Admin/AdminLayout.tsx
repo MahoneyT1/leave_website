@@ -22,7 +22,6 @@ const AdminLayout: React.FC = () => {
     });
 
     const navigate = useNavigate();
-
     const { register, handleSubmit, reset, formState: { errors } } = useForm<{ type: LeaveType, price: string }>({});
 
     const [updatePrice, setUpdatePrice] = useState('');
@@ -89,7 +88,7 @@ const AdminLayout: React.FC = () => {
 
     const handleNavigate = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
-
+        navigate('/');
     }
     return (
         <section className="w-full h-screen bg-primary">

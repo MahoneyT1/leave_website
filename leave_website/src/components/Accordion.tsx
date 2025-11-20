@@ -11,7 +11,7 @@ interface AccordionProps {
   className?: string;
 }
 
-const Accordion: React.FC<AccordionProps> = ({ items, className }) => {
+const Accordion: React.FC<AccordionProps> = ({ items }) => {
 
     const [openIndex, setOpenIndex] = React.useState<number | null>(null);
 

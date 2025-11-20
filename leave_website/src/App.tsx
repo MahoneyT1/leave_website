@@ -1,8 +1,6 @@
-import Navbar from './components/Navbar';
 import './App.css';
 import './tailwind.css';
 import Home from './pages/Home';
-import Footer from './components/Footer';
 import About from './pages/About';
 import FAQ from './components/FAQ';
 import HowItWorks from './components/HowItWorks';
@@ -13,12 +11,12 @@ import Pricing from './pages/Pricing';
 import AdminLayout from './pages/Admin/AdminLayout';
 import UserProfile from './pages/UserProfile';
 import PublicLayout from './pages/PublicLayout';
-
+import ForgotPassword from './pages/ForgotPassword';
 import { Routes, Route, Outlet } from 'react-router-dom';
-
 import PublicRoute from './components/PublicRoute';
 import ProtectedAdminRoute from './pages/Admin/ProtectedAdminRoute';
 import ProtectedRoute from './components/ProtectedRoute';
+
 
 function App() {
   return (
@@ -40,6 +38,7 @@ function App() {
               </PublicRoute>
             }
           />
+          <Route path='/forgot-password' element={<ForgotPassword />} />
         </Route>
 
         {/* PROTECTED USER ROUTES */}

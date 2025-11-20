@@ -2,11 +2,9 @@ import React from 'react'
 import Navbar from '../components/Navbar';
 import { Outlet } from 'react-router-dom';
 import Footer from '../components/Footer';
-import PublicRoute from '../components/PublicRoute';
 
 
-
-const PublicLayout = () => {
+const PublicLayout: React.FC = () => {
   return (
     <>
         <header>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getUserLeaveRequests } from "../services";
-import { auth } from "../firebase";
 import { CircleCheck, Calendar } from "lucide-react";
+
 
 const UserProfile: React.FC = () => {
     const [requests, setRequests] = useState<any[]>([]);

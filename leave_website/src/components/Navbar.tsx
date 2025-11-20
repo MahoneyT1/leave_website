@@ -4,7 +4,7 @@ import { Menu, X } from 'lucide-react';
 import logo from '../assets/logo.png';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthProvider';
-import { loginUser, logoutUser } from '../services';
+import { logoutUser } from '../services';
 
 
 const Navbar: React.FC = () => {
