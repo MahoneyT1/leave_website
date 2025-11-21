@@ -61,6 +61,7 @@ const Login: React.FC = () => {
             // if user does not exist create document
             if(!userSnap.exists()) {
                 await setDoc(userRef, {
+                    id: user.uid,
                     name: user.displayName,
                     email: user.email,
                     createdAt: new Date(),

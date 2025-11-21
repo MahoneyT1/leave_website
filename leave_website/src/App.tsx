@@ -16,6 +16,8 @@ import { Routes, Route, Outlet } from 'react-router-dom';
 import PublicRoute from './components/PublicRoute';
 import ProtectedAdminRoute from './pages/Admin/ProtectedAdminRoute';
 import ProtectedRoute from './components/ProtectedRoute';
+import AdminRequestHandle from './pages/Admin/AdminRequestHandle';
+
 
 
 function App() {
@@ -62,7 +64,11 @@ function App() {
           }
         >
           <Route path="/admin" element={<AdminLayout />} />
+          <Route path={'/handle-request'} element={<AdminRequestHandle />} />
+
         </Route>
+
+        
       </Routes>
     </>
   );

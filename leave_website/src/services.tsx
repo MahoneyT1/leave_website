@@ -2,7 +2,7 @@
  * Services Module
  */
 import { auth, db } from "./firebase";
-import { doc, setDoc, getDocs, collection, addDoc, serverTimestamp, query, where } from 'firebase/firestore';
+import { doc, setDoc, getDocs, collection, addDoc, serverTimestamp, query, where, updateDoc } from 'firebase/firestore';
 import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
@@ -168,4 +168,32 @@ export const getUserLeaveRequests = async () => {
     return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 };
 
-// type for forgotten user
+// get all leave request information
+export const getAllLeaveRequest = async ()=> {
+
+    const snapshot = await getDocs(collection(db, 'leave_requests'))
+    
+    return snapshot.docs.map(doc => {
+        const data = doc.data();
+
+        return {
+            id: doc.id,
+            ...data,
+            createdAt: data.createdAt?.toDate() || null,
+            updatedAt: data.updatedAt?.toDate() || null
+        };
+    });
+}
+
+export const updateStatus = async (id: string, status: string) => {
+    try {
+        const leaveRef = doc(db, "leave_requests", id); // reference to the document
+        await updateDoc(leaveRef, {
+            status: status,
+        });
+        return true;
+
+    } catch (err) {
+        throw new Error()
+    }
+};
