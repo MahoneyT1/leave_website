@@ -45,7 +45,10 @@ const Login: React.FC = () => {
             if (err.code === "auth/user-not-found") {
                 toast.error("User does not exist! ")
             }
-            console.log(err)
+            else {
+                toast.error("User Not found !")
+                reset();
+            }
         }
 
     }

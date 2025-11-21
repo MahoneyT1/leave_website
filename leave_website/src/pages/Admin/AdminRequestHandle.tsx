@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getAllLeaveRequest } from "../../services.tsx";
-import { doc } from 'firebase/firestore';
-import { auth } from '../../firebase.tsx';
 import { updateStatus } from '../../services.tsx';
-
+import { Link } from 'react-router-dom';
 
 
 interface LeaveRequestType {
@@ -16,9 +14,7 @@ interface LeaveRequestType {
 const AdminRequestHandle: React.FC = () => {
 
   const [leaveRequest, setLeaveRequest ] = useState<LeaveRequestType[]>();
-  const [updatingIds, setUpdatingIds] = useState<string[]>([]); // tracks which leave requests are being updated
-
-
+  const [updatingIds, setUpdatingIds] = useState<string[]>([]);
   useEffect(()=> {
 
     const fetchRequests = async () => {
@@ -70,8 +66,16 @@ const AdminRequestHandle: React.FC = () => {
                     Manage and track all military leave applications
                   </p>
               </div>
+
+              <div className='bg-primary mt-8 rounded p-5'>
+                <button className='bg-orange-500 p-4 rounded-lg w-50 text-white font-bold'>
+                  {<Link to={'/'}>Home</Link>}
+                </button>
+              </div>
           
             </div>
+
+
             
       <div className="grid grid-cols-1   md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
 

@@ -15,16 +15,20 @@ import {
 
 // register user function
 export const registerUser = async (email: string, password: string, name: string) => {
-    const userCredentials = await createUserWithEmailAndPassword(auth, email, password);
+    try {
+        const userCredentials = await createUserWithEmailAndPassword(auth, email, password);
 
-    const user = userCredentials.user
+        const user = userCredentials.user
 
-    await setDoc(doc(db, "users", user.uid), {
-        name: name,
-        email: user.email,
-        created: new Date()
-    })
-    return userCredentials
+        await setDoc(doc(db, "users", user.uid), {
+            name: name,
+            email: user.email,
+            created: new Date()
+        })
+        return userCredentials
+    } catch (err) {
+        throw new Error(String(err));
+    }
 };
 
 // login user function

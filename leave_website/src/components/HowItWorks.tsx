@@ -7,7 +7,7 @@ const HowItWorks: React.FC = () => {
   return (
       <section className='bg-accent '>
 
-        <div className='py-12 lg:py-20'>
+        <div className='py-20 lg:py-20'>
 
             <div className='container px-4 mx-auto grid gap-6'>
 

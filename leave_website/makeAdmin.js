@@ -12,7 +12,7 @@ admin.initializeApp({
 });
 
 // 🔥 Replace this with the user's UID
-const uid = "qzmm9xeeWwYd4tWGEclXynBkBdx2";
+const uid = "x4fGRF5oFURDxY48x5QzOiFERN53";
 
 async function setAdmin() {
   try {

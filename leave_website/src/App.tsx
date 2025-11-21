@@ -57,16 +57,16 @@ function App() {
 
         {/* PROTECTED ADMIN ROUTES */}
         <Route
+          path="/admin"
           element={
             <ProtectedAdminRoute>
-              <Outlet />
+              <AdminLayout />   {/* This is the admin dashboard layout */}
             </ProtectedAdminRoute>
           }
         >
-          <Route path="/admin" element={<AdminLayout />} />
-          <Route path={'/handle-request'} element={<AdminRequestHandle />} />
-
+          {/* Nested admin routes */}
         </Route>
+        <Route path="handle-request" element={<AdminRequestHandle />} />
 
         
       </Routes>

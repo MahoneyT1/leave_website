@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,  } from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 import {
     getEmergency, getCompassionate, getHumanitarian,
     updateEmergency, updateCompassionate, updateHumanitarian
@@ -21,7 +22,7 @@ const AdminLayout: React.FC = () => {
         humanitarian: null
     });
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const { register, handleSubmit, reset, formState: { errors } } = useForm<{ type: LeaveType, price: string }>({});
 
     const [updatePrice, setUpdatePrice] = useState('');
@@ -86,10 +87,10 @@ const AdminLayout: React.FC = () => {
         }
     };
 
-    const handleNavigate = (e: { preventDefault: () => void; }) => {
-        e.preventDefault();
-        navigate('/');
-    }
+    // const handleNavigate = (e: { preventDefault: () => void; }) => {
+    //     e.preventDefault();
+    //     navigate('/');
+    // }
     return (
         <section className="w-full h-screen bg-primary">
             <div className="container px-4 mx-auto md:px-50 lg:px-70">
@@ -136,9 +137,14 @@ const AdminLayout: React.FC = () => {
                                         Update
                                     </button>
 
-                                    <button type='button' onClick={handleNavigate}
+                                    <button type='button'
                                     className='bg-orange-500 w-30 p-1 shadow-lg rounded '>
-                                        Back
+                                        <Link to='/'> Home</Link>
+                                    </button>
+
+                                    <button type='button'
+                                        className='bg-white text-primary p-1  shadow-lg rounded '>
+                                        <Link to='/handle-request'> Requests</Link>
                                     </button>
                                 </div>
                             </form>
