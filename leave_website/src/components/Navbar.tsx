@@ -39,7 +39,7 @@ const Navbar: React.FC = () => {
                 <div className='flex items-center '>
                     <img src={logo} alt="logo" className='w-10 h-auto ' />
                     <h1 className='text-gunmental font-stardos text-primary
-                        text-lg md:text-2xl text-center md:font-bold'>Us Military Leave Department</h1>
+                        text-lg md:text-2xl text-center md:font-bold'>US Military Leave Department</h1>
                 </div>
 
                 <div className='flex justify-center items-center'>
@@ -98,7 +98,7 @@ const Navbar: React.FC = () => {
                 <nav className='absolute top-16 h-auto w-[100px] right-2 
                     flex flex-col items-center md:hidden flex-column
                     gap-2 lg:gap-3 bg-white px-4 py-2 rounded-md shadow-md'>
-                    <ul>
+                    <ul className='text-primary'>
                         <li className='p-1 font-semibold hover:text-sand'><a href="/">Home</a></li>
                         <li className='p-1 font-semibold hover:text-sand'><a href="/about">About</a></li>
                         <li className='p-1 font-semibold hover:text-sand'><Link to="/Fag">Fag</Link></li>
@@ -106,7 +106,7 @@ const Navbar: React.FC = () => {
                         <li className='p-1 font-semibold hover:text-sand'><Link to="/contact">Contact</Link></li>
                         <li className='p-1 font-semibold hover:text-sand'><Link to="/profile">Profile</Link></li>
                         <li className='p-1 font-semibold hover:text-sand'><Link to="/admin">Admin</Link></li>
-                        <li className='hover:text-sand'><Link to="/login">Login</Link></li>
+                        <li className='p-1 font-semibold hover:text-sand'><Link to="/login">Login</Link></li>
 
                     </ul>  
                 </nav>

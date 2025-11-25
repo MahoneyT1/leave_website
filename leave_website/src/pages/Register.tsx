@@ -21,7 +21,6 @@ const Register: React.FC = () => {
     } = useForm();
 
     const onSubmit = async (data: any) => {
-        console.log(data);
 
        const { email, password, name } = data;
 
