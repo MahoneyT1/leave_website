@@ -332,15 +332,14 @@ const Pricing: React.FC = () => {
                     </div>
 
                     <div className='bg-secondary/10  rounded mt-7 '>
-                        <h4 className='text-lg text-primary'>Applicatetion Fee: $499</h4>
-                        <p className='text-secondary text-sm'> This fee covers the processing and review of your
+                        {/* <p className='text-secondary text-sm'> This fee covers the processing and review of your
                             Compassionate Reassignment application
-                        </p>
+                        </p> */}
 
                         <button
                             type="submit"
                             disabled={isSubmitting}
-                            className={`bg-primary text-white font-semibold mt-5 rounded p-3 ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}>
+                            className={`bg-primary text-white font-semibold mt-5 rounded p-3 w-full ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}>
                             {isSubmitting ? 'Submitting...' : 'Submit Application'}
                         </button>
                     </div>    

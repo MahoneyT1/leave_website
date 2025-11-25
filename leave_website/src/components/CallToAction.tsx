@@ -1,7 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 const CallToAction: React.FC = () => {
+    const navigate = useNavigate();
+
   return (
       <section className="py-20 bg-primary">
 
@@ -16,7 +19,9 @@ const CallToAction: React.FC = () => {
                 details while you focus on what matters most - your family.    
             </p>
             
-            <button className="bg-warning inline-flex items-center justify-center 
+            <button 
+                onClick={()=> navigate('/price')}
+            className="bg-warning inline-flex items-center justify-center 
                 gap-2 whitespace-nowrap font-medium ring-offset-background 
                 transition-colors focus-visible:outline-none 
                 focus-visible:ring-2 focus-visible:ring-ring 

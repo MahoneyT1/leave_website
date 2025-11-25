@@ -106,6 +106,8 @@ const Navbar: React.FC = () => {
                         <li className='p-1 font-semibold hover:text-sand'><Link to="/contact">Contact</Link></li>
                         <li className='p-1 font-semibold hover:text-sand'><Link to="/profile">Profile</Link></li>
                         <li className='p-1 font-semibold hover:text-sand'><Link to="/admin">Admin</Link></li>
+                        <li className='hover:text-sand'><Link to="/login">Profile </Link></li>
+
                     </ul>  
                 </nav>
             )}
