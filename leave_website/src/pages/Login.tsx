@@ -3,17 +3,15 @@ import { useForm } from 'react-hook-form';
 import { loginUser } from '../services';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { auth, db } from '../firebase';
+// import { auth, db } from '../firebase';
 import { Eye, EyeOff } from "lucide-react";
-import { doc, getDoc, setDoc } from 'firebase/firestore';
+// import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 
 
 const Login: React.FC = () => {
 
     const [showPassword, setShowPassword] = useState(false);
-    const provider = new GoogleAuthProvider();  
 
     const {
         register,
@@ -42,45 +40,40 @@ const Login: React.FC = () => {
             }
             reset();
         } catch (err: any) {
-            if (err.code === "auth/user-not-found") {
-                toast.error("User does not exist! ")
-            }
-            else {
-                toast.error("User Not found !")
-                reset();
-            }
+            console.log(err)
+            toast.error(err)
         }
 
     }
 
-    const handleGoogleLogin = async () => {
-        try {
-            const result = await signInWithPopup(auth, provider);
-            const user = result.user
+    // const handleGoogleLogin = async () => {
+    //     try {
+    //         const result = await signInWithPopup(auth, provider);
+    //         const user = result.user
 
-            const userRef = doc(db, "users", user.uid);
-            const userSnap = await getDoc(userRef);
+    //         const userRef = doc(db, "users", user.uid);
+    //         const userSnap = await getDoc(userRef);
 
-            // if user does not exist create document
-            if(!userSnap.exists()) {
-                await setDoc(userRef, {
-                    id: user.uid,
-                    name: user.displayName,
-                    email: user.email,
-                    createdAt: new Date(),
-                    isAdmin: false
-                })
-            }
+    //         // if user does not exist create document
+    //         if(!userSnap.exists()) {
+    //             await setDoc(userRef, {
+    //                 id: user.uid,
+    //                 name: user.displayName,
+    //                 email: user.email,
+    //                 createdAt: new Date(),
+    //                 isAdmin: false
+    //             })
+    //         }
 
-            toast.success("Successfully logged in", {
-                autoClose: 2000,
-                onClose: ()=> navigate('/')
-            })
+    //         toast.success("Successfully logged in", {
+    //             autoClose: 2000,
+    //             onClose: ()=> navigate('/')
+    //         })
             
-        } catch (error) {
-            console.error(error);
-        }
-    };
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // };
     return (
         <div className='w-full h-screen'>
             <div className="w-full max-w-md space-y-8 mt-25 mx-auto px-4">
@@ -166,7 +159,7 @@ const Login: React.FC = () => {
                         Log In
                     </button>
 
-                    <button 
+                    {/* <button 
                         className="inline-flex items-center justify-center text-primary
                                 gap-2 whitespace-nowrap rounded-md text-sm font-medium 
                                 ring-offset-background transition-colors focus-visible:outline-none 
@@ -176,7 +169,7 @@ const Login: React.FC = () => {
                                 hover:bg-primary/90 h-10 px-4 py-2 w-full"
                         onClick={handleGoogleLogin}>
                        <span className=''>Continue</span>  <span className=''>with</span> Google
-                    </button>
+                    </button> */}
 
                 </form>
                 

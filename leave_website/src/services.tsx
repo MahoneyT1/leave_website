@@ -33,7 +33,31 @@ export const registerUser = async (email: string, password: string, name: string
 
 // login user function
 export const loginUser = async (email: string, password: string) => {
-    return await signInWithEmailAndPassword(auth, email, password);
+   
+        try {          
+    
+            // Now attempt password login
+            const result = await signInWithEmailAndPassword(auth, email, password);
+            return result;
+
+        } catch (error: any) {
+
+            // Firebase-specific errors
+            if (error.code === "auth/wrong-password") {
+                throw new Error("Incorrect password. Please try again.");
+            }
+
+            if (error.code === "auth/invalid-email") {
+                throw new Error("Enter a valid email address.");
+            }
+
+            if (error.code === "auth/user-disabled") {
+                throw new Error("This account has been disabled.");
+            }
+
+            // Custom errors thrown from above
+            throw new Error(error.message || "Login failed. Please try again.");
+    }
 };
 
 // logout user function

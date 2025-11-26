@@ -1,8 +1,56 @@
-import React from 'react'
-
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 
 const Contact: React.FC = () => {
+    // api url
+    const apiUrl = import.meta.env.VITE_EMAIL_SENDER_API;
+
+    const {
+        register,
+        reset,
+        handleSubmit,
+        formState: { errors, isSubmitting }
+    } = useForm()
+
+    const handleContact = async(data: any) => {
+
+        const to = import.meta.env.VITE_EMAIL_USER;
+
+        const { name, email, message } = data;
+
+        const newData = {
+            to,
+            name,
+            subject: "Applying for leave",
+            message: `Hello ${name} with email ${email}  ${message}`
+        }
+
+        try {
+            const response = await fetch(apiUrl, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                },
+                body: JSON.stringify(newData)
+            })
+            if (response.ok) {
+                toast.success("Message sent successfully!");
+                reset();
+
+            } else {
+                toast.error("Failed to send message.")
+                reset();
+            }
+        }catch (err) {
+            console.error("Error sending form:", err);
+            toast.error("An error occurred. Please try again.");
+            reset();
+        }
+    }
+    
     return (
         <div className="min-h-screen bg-background py-20">
             <div className="container mx-auto px-4 mt-15">
@@ -56,7 +104,7 @@ const Contact: React.FC = () => {
                                         </h3>
                                         
                                         <p className="text-muted-primary/80">
-                                            1-800-MILITARY
+                                            1-800-345 6754
                                         </p>
                                         
                                         <p className="text-sm text-primary/80">
@@ -135,7 +183,8 @@ const Contact: React.FC = () => {
                                 Send Us a Message
                         </h2>
                         
-                        <form className="space-y-6">
+                        <form onSubmit={handleSubmit(handleContact)}
+                             className="space-y-6">
                             <div>
                                 <label className="text-sm font-medium leading-none 
                                     peer-disabled:cursor-not-allowed peer-disabled:opacity-70" 
@@ -151,9 +200,12 @@ const Contact: React.FC = () => {
                                     focus-visible:ring-2 focus-visible:ring-ring 
                                     focus-visible:ring-offset-2 disabled:cursor-not-allowed 
                                     disabled:opacity-50 md:text-sm mt-2"
-                                    id="name" name="name" placeholder="John Doe" />
+                                    id="name" { ...register('name', {
+                                        required: "provide name"
+                                    }) } placeholder="John Doe" />
 
                             </div>
+                            { errors.name && ( <p className='text-red-500'> {errors.name.message as string } </p> ) }
                             
                             <div>
                                 <label className="text-sm font-medium leading-none 
@@ -167,9 +219,11 @@ const Contact: React.FC = () => {
                                 file:border-0 file:bg-transparent file:text-sm file:font-medium 
                                 file:text-primary placeholder:text-muted-foreground focus-visible:outline-none 
                                 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed 
-                                disabled:opacity-50 md:text-sm mt-2" id="email" name="email" placeholder="john.doe@example.com"/>
+                                disabled:opacity-50 md:text-sm mt-2" id="email" { ...register('email', { required: "email must be provided."}) } placeholder="john.doe@example.com"/>
                                 
                             </div>
+                                {errors.email && (<p className='text-red-500'> {errors.email.message as string} </p>)}
+
                             
                             <div>
                                 <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed 
@@ -181,25 +235,9 @@ const Contact: React.FC = () => {
                                     file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-primary 
                                     placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 
                                     focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed 
-                                    disabled:opacity-50 md:text-sm mt-2" id="phone" name="phone" placeholder="(555) 123-4567"/>
+                                    disabled:opacity-50 md:text-sm mt-2" id="phone" { ...register('phone')} placeholder="(555) 123-4567"/>
                             </div>
-                            
-                            <div>
-                                
-                                <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed 
-                                    peer-disabled:opacity-70" htmlFor="relationship">
-                                        Relationship to Service Member *
-                                </label>
-                                
-                                <input className="flex h-10 w-full rounded-md border 
-                                    border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 
-                                    file:bg-transparent file:text-sm file:font-medium file:text-primary 
-                                    placeholder:text-muted-foreground focus-visible:outline-none 
-                                    focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 
-                                    disabled:cursor-not-allowed disabled:opacity-50 md:text-sm mt-2" id="relationship" 
-                                    name="relationship" placeholder="e.g., Spouse, Parent, Sibling"/>
-                                
-                            </div>
+                            {errors.phone && (<p className='text-red-500'> {errors.phone.message as string} </p>)}
                             
                             <div>
                                 <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" 
@@ -211,18 +249,21 @@ const Contact: React.FC = () => {
                                     text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none 
                                     focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed 
                                     disabled:opacity-50 mt-2 min-h-[120px]" 
-                                    id="message" name="message" placeholder="Please describe how we can help you...">
+                                    id="message" {...register('message')} placeholder="Please describe how we can help you...">
                                 </textarea>
                                 
                             </div>
+                                {errors.message && (<p className='text-red-500'> {errors.message.message as string} </p>)}
+
                             
-                            <button className="inline-flex items-center justify-center gap-2 
+                            <button disabled={isSubmitting}
+                                className={`inline-flex items-center justify-center gap-2 
                                 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background 
                                 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring 
                                 focus-visible:ring-offset-2 disabled:pointer-events-none 
                                 disabled:opacity-50 [&amp;_svg]:pointer-events-none 
                                 [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-white 
-                                hover:bg-primary/90 h-10 px-4 py-2 w-full" type="submit">
+                                hover:bg-primary/90 h-10 px-4 py-2 w-full" type="submit" ${isSubmitting ? "opacity-50" : ""}`}>
                                     Send Message
                             </button>
                         </form>
