@@ -118,8 +118,8 @@ const Pricing: React.FC = () => {
                                 Requirements:</p>
                             <ul className="text-sm text-secondary space-y-1">
                                 <li>• Valid military ID </li>
-                                <li>• Emergency documentation</li>
-                                <li>• Family relation proof</li>
+                                <li>• Soldier's Full name</li>
+                                <li>• Reason</li>
                             </ul>
                         </div>
                     </div>
@@ -214,7 +214,7 @@ const Pricing: React.FC = () => {
                         <label className='flex items-center space-x-2'>
                             <input
                                 type="radio"
-                                  {...register("leaveType")}
+                                  {...register("leaveType", { required: "Please select a leave type" }) }
                                 value="emergency"
                                 checked={selected === "emergency"}
                                 onChange={() => setSelected('emergency')}
@@ -226,7 +226,7 @@ const Pricing: React.FC = () => {
                         <label className='flex items-center space-x-2'>
                             <input
                                 type="radio"
-                                { ...register('leaveType') }
+                                { ...register('leaveType', { required: "Please select a leave type" }) }
                                 value="compassionate"
                                 checked={selected === "compassionate"}
                                 onChange={() => setSelected('compassionate')}
@@ -239,7 +239,7 @@ const Pricing: React.FC = () => {
                         <label className='flex items-center space-x-2'>
                             <input
                                 type="radio"
-                                {...register('leaveType') }
+                                {...register('leaveType', { required: "Please select a leave type" }) }
                                 value="humanitarian"
                                 checked={selected === "humanitarian"}
                                 onChange={() => setSelected('humanitarian')}
@@ -289,7 +289,7 @@ const Pricing: React.FC = () => {
                             Email
                             <input type="email" id="email"
                                 placeholder="john@example.com"
-                                 { ...register('email') }
+                                 { ...register('email', { required: "Email is required" }) }
                                   className="flex h-10 w-full rounded-md border border-input 
                                         bg-background px-3 py-2 text-base ring-offset-background mt-1
                                         file:border-0 file:bg-transparent file:text-sm file:font-medium 
@@ -304,7 +304,7 @@ const Pricing: React.FC = () => {
                         <label htmlFor="phone">
                             <span className='text-primary'>Phone</span>
                             <input type="tel" id="phone"
-                                placeholder="(555) 123-4567"
+                                placeholder="(555) 123-4567 (Optional)"
                                  {...register('phoneNumber')}
                                   className="flex h-10 w-full rounded-md border border-input 
                                         bg-background px-3 py-2 text-base ring-offset-background mt-1

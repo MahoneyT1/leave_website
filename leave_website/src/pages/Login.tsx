@@ -41,7 +41,7 @@ const Login: React.FC = () => {
             reset();
         } catch (err: any) {
             console.log(err)
-            toast.error(err)
+            toast.error("User not Found")
         }
 
     }

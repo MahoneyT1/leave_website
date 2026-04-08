@@ -127,7 +127,7 @@ const Contact: React.FC = () => {
                                     </h3>
                                     
                                     <p className="text-primary/80">
-                                        support@militaryleave.gov
+                                        support@leaves-admin.com
                                     </p>
                                     
                                         <p className="text-sm text-primary/80">
