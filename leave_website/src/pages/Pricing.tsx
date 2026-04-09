@@ -82,7 +82,7 @@ const Pricing: React.FC = () => {
 
   return (
       <div className='container px-4 mx-auto mb-7 max-w-230'>
-        <div className="text-center mb-12 mt-30">
+        <div className="text-center mb-9 mt-10">
             <h1 className="text-4xl font-bold text-primary mb-4">
                 Military Leave Application
             </h1>
