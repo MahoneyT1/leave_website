@@ -110,6 +110,11 @@ const AdminRequestHandle: React.FC = () => {
             </div>
 
             <div>
+              <h3 className="font-semibold ">Reason</h3>
+              <p className="text-secondary">{req.description}</p>
+            </div>
+
+            <div>
               <h3 className="font-semibold ">Status</h3>
               <p className="text-secondary">{req.status}</p>
 

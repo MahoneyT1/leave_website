@@ -93,104 +93,69 @@ const Pricing: React.FC = () => {
             </p>
         </div>
 
-          <div className="grid md:grid-cols-3 gap-6 mb-12">
+          <div className=" mb-12">
             <div className="rounded-lg border border-primary bg-card text-primary shadow-sm cursor-pointer 
-                transition-all ring-2 ring-primary">
-                    <div className="flex flex-col space-y-1.5 p-6">
+                transition-all ring-2 ring-primary lg:px-10  md:p-6 md:px-15">
+
+                  <div className="flex flex-col space-y-1.5 p-6 ">
                         <h3 className="font-semibold tracking-tight text-xl">
-                            Emergency Family Leave
+                            Emergency Family Leave 
                         </h3>
+
+                        <div className='mt-3 rounded bg-secondary/10 p-4 border border-secondary'>
+                          <h4 className='text-primary font-bold  text-sm mb-0'>Durations: </h4>
+                          <ul className='text-md  font-bold mt-1 list-disc list-inside my-3'>
+
+                              <li className='md:ms-2 text-secondary text-sm'>
+                                1 Month Leave Application Processing Fee — 410.00 CAD | 300 USD
+                              </li>
+
+                              <li className='md:ms-2 text-secondary text-sm'>
+                                2 Months Leave Application Processing Fee — 684.38 CAD | 500 USD
+                              </li>
+
+                              <li className='md:ms-2 text-secondary text-sm'>
+                                3 Months Leave Application Processing Fee — 1,368.76 CAD | 1,000 USD
+                              </li>
+                          </ul>
+                        </div>
                         
-                        <p className="text-3xl font-bold text-primary">
+                        {/* <p className="text-3xl font-bold text-primary">
                             ${leaves.emergency?.price?.toString()}
-                        </p>
+                        </p> */}
                         
                     </div>
-                    
-                    <div className="p-6 pt-0">
-                        <p className="text-sm text-secondary mb-4">
-                            Immediate assistance for family emergencies requiring urgent 
-                            attention
+ 
+                  <div className="p-6 pt-0 ">
+
+                    <div className='bg-secondary/10 p-4 rounded mb-5'>
+                        <p className='font-bold bg-amber-100 italic'>Attention ! ! !</p>
+                        <p className="text-secondary mb-4  ">
+                          Immediate assistance for first-family emergencies requiring urgent attention,
+                          such as marriage, engagement, or the birth of a child, may still be considered
+                          upon review and approval.
                         </p>
+                    </div>
+
                         
-                        <div className="space-y-2">
-                            <p className="text-sm font-semibold">
+                      <div className="space-y-2 p-4 border border-secondary rounded bg-secondary/10">
+                            <p className="text-md font-semibold">
                                 Requirements:</p>
-                            <ul className="text-sm text-secondary space-y-1">
-                                <li>• Valid military ID </li>
-                                <li>• Soldier's Full name</li>
-                                <li>• Reason</li>
+                          <ul className="text-sm text-secondary space-y-1 list-disc list-inside">
+                              <li className='ms-1'>Applicant’s Full Name</li>
+                              <li className='ms-1'>Applicant’s Email Address</li>
+                              <li className='ms-1'>Soldier’s Full Name</li>
+                              <li className='ms-1'>Military Identification Number</li>
+                              <li className='ms-1'>Purpose of Application / Applicable Conditions</li>
                             </ul>
                         </div>
                     </div>
                     
                 </div>
+
+            </div>
                 
-              <div className="rounded-lg border border-primary bg-card text-primary shadow-sm cursor-pointer 
-                transition-all ring-2 ring-primary">
-                        <div className="flex flex-col space-y-1.5 p-6">
-                            <h3 className="font-semibold tracking-tight text-xl">
-                                Compassionate Reassignment
-                            </h3>
-                            
-                            <p className="text-3xl font-bold text-primary">${leaves?.compassionate?.price}
-                            </p>
-                            
-                        </div>
-                        
-                        <div className="p-6 pt-0">
-                            <p className="text-sm text-secondary mb-4">
-                                Reassignment due to family hardship or extraordinary 
-                                circumstances
-                            </p>
-                            
-                            <div className="space-y-2">
-                                <p className="text-sm font-semibold">
-                                    Requirements:
-                                </p>
-                                
-                                <ul className="text-sm text-secondary space-y-1">
-                                    <li>• Valid military ID</li>
-                                    <li>• Hardship documentation</li>
-                                    <li>• Commander endorsement</li>
-                                </ul>
-                            </div>
-                            
-                        </div>
-                        
-                    </div>
-                    
-              <div className="rounded-lg border border-primary bg-card text-primary shadow-sm cursor-pointer 
-                transition-all ring-2 ring-primary">
-                            <div className="flex flex-col space-y-1.5 p-6">
-                                <h3 className="font-semibold tracking-tight text-xl">
-                                    Humanitarian Leave
-                                </h3>
-                                
-                                <p className="text-3xl font-bold text-primary">$ {leaves?.humanitarian?.price}
-                                </p>
-                            </div>
-                            
-                            <div className="p-6 pt-0">
-                                <p className="text-sm text-secondary mb-4">
-                                    Leave for humanitarian reasons affecting service 
-                                    member or family
-                                </p>
-                                
-                                <div className="space-y-2">
-                                    <p className="text-sm font-semibold">
-                                        Requirements:
-                                    </p>
-                                    
-                                    <ul className="text-sm text-secondary space-y-1">
-                                        <li>• Valid military ID</li>
-                                        <li>• Situation documentation</li>
-                                        <li>• Supporting evidence</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+ 
 
           <div className="rounded-lg border bg-card text-primary shadow-sm">
             <div className="flex flex-col space-y-1.5 p-6 ">
@@ -206,9 +171,9 @@ const Pricing: React.FC = () => {
             <div className="p-6 pt-0 mb-4">
 
                 <form className="space-y-2" onSubmit={handleSubmit(onSubmit)}>
-                    <div className='text-primary font-bold'>
+                    {/* <div className='text-primary font-bold'>
                         Leave Type
-                    </div>
+                    </div> */}
 
                     <div className='space-y-2 text-secondary'>
                         <label className='flex items-center space-x-2'>
@@ -219,7 +184,7 @@ const Pricing: React.FC = () => {
                                 checked={selected === "emergency"}
                                 onChange={() => setSelected('emergency')}
                             />
-                              <span>Emergency Family Leave ${leaves.emergency?.price?.toString()}</span>
+                              <span>1 Month ${leaves.emergency?.price?.toString()}</span>
                         </label>
                         { errors.leaveType && ( <p className='text-red-500'> {errors.leaveType.message} </p> ) }
 
@@ -231,7 +196,7 @@ const Pricing: React.FC = () => {
                                 checked={selected === "compassionate"}
                                 onChange={() => setSelected('compassionate')}
                             />
-                              <span>Compassionate Reassignment - ${leaves.compassionate?.price?.toString()}</span>
+                              <span> 2 Months ${leaves.compassionate?.price?.toString()}</span>
                         </label>
                         {errors.leaveType && (<p className='text-red-500'> {errors.leaveType.message} </p>)}
 
@@ -244,7 +209,7 @@ const Pricing: React.FC = () => {
                                 checked={selected === "humanitarian"}
                                 onChange={() => setSelected('humanitarian')}
                             />
-                              <span>Humanitarian Leave - ${leaves.humanitarian?.price?.toString()}</span>
+                              <span>3 Months ${leaves.humanitarian?.price?.toString()}</span>
                         </label>
                         {errors.leaveType && (<p className='text-red-500'> {errors.leaveType.message} </p>)}
 
@@ -286,7 +251,7 @@ const Pricing: React.FC = () => {
 
 
                         <label htmlFor="email">
-                            Email
+                            Applicant's Email
                             <input type="email" id="email"
                                 placeholder="john@example.com"
                                  { ...register('email', { required: "Email is required" }) }
@@ -302,7 +267,7 @@ const Pricing: React.FC = () => {
 
 
                         <label htmlFor="phone">
-                            <span className='text-primary'>Phone</span>
+                            <span className='text-primary'>Applicant's Phone</span>
                             <input type="tel" id="phone"
                                 placeholder="(555) 123-4567 (Optional)"
                                  {...register('phoneNumber')}
@@ -317,7 +282,7 @@ const Pricing: React.FC = () => {
                         {errors.phoneNumber && (<p className='text-red-500'> {errors.phoneNumber.message} </p>)}
 
                         <label htmlFor="long-text" >
-                            <span className='text-primary '>Situation Description</span>
+                            <span className='text-primary '>Purpose</span>
                             <textarea id="long-text" 
                                 placeholder='Please Describe your situation in details'
                                 { ...register('description') }
